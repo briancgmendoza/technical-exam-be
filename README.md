@@ -5,4 +5,4 @@
 ![ScreenShot]
 
 # Delete Request from localhost/api/Employee/{id#}
-![ScreenShot] (https://github.com/briancgmendoza/technical-exam-be/blob/master/DeleteRequest.png)
+![ScreenShot](https://github.com/briancgmendoza/technical-exam-be/blob/master/DeleteRequest.png)
