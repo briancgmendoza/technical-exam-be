@@ -48,6 +48,34 @@ namespace TechnicalExam.Controllers
             return new JsonResult(table);
         }
 
+        // Get Request for specific ID
+        [HttpGet("{id}")]
+        public JsonResult GetSpecificID(int id)
+        {
+            string query = @"
+                            select EmployeeMasterID, LastName, FirstName, MiddleName, Age, Address, PhoneNumber 
+                            from dbo.EmployeeMaster where EmployeeMasterID = @EmployeeMasterID";
+
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myCommand.Parameters.AddWithValue("@EmployeeMasterID", id);
+
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
+
         // Post Request
         [HttpPost]
         public JsonResult Post(Employee emp)
